@@ -1,0 +1,73 @@
+<div class="flex flex-col items-center px-6 h-auto">
+    <div *ngIf="!fileUrl" class="md:flex items-center content-center min-h-[350px] gap-x-6">
+        <div *ngIf="!uploadFile"
+            class="relative flex flex-col outline-secondary/50 mt-24 outline-2 -outline-offset-4 outline-dashed w-[400px] h-[400px] rounded-2xl items-center justify-center">
+            <input #fileInput type="file" (change)="handleChange($event)" [accept]="allowedFileType"
+                class="absolute w-full h-full cursor-pointer opacity-0 top-0 left-0" />
+
+            <p class="text-center mt-4 text-base max-w-[90%]">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-10 mx-auto m-2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+                </svg>
+                Drag and drop <br />
+                resume here to upload. <br />
+                (Supported format: PDF)
+            </p>
+
+            <button type="button" (click)="fileInput.click()"
+                class="z-10 mt-6 text-green-50 px-6 py-3 bg-green-600 rounded-lg font-medium text-base hover:bg-green-800 ease-in-out">
+                Browse File
+            </button>
+        </div>
+
+        <div *ngIf="uploadFile"
+            class="relative flex flex-col outline-secondary/50 mt-24 outline-2 -outline-offset-4 outline-dashed w-[400px] h-[400px] rounded-2xl items-center justify-center">
+            <app-loading [loadingBars]="true" />
+        </div>
+
+    </div>
+
+    <div *ngIf="fileUrl && uploadFile && !isUploading">
+        <div class="md:flex items-center content-center min-h-[350px] gap-x-6">
+            <div
+                class="flex flex-col justify-end w-[300px] h-[600px] md:w-[600px] 2xl:h-[800px] rounded-2xl items-center relative bg-cover bg-center overflow-hidden outline-secondary/50 outline-2 -outline-offset-4 outline-dashed">
+                <img [src]="fileUrl" class="overflow-scroll p-5">
+                <div class="flex flex-col w-full p-4">
+                    <p class="mb-6">{{ uploadFile.name }}</p>
+                </div>
+            </div>
+            <div
+                class="flex flex-col justify-end w-[300px] p-5 h-[600px] md:w-[600px] 2xl:h-[800px] rounded-2xl items-center relative bg-cover bg-center overflow-hidden outline-secondary/50 outline-2 -outline-offset-4 outline-dashed">
+                <div class="mx-auto h-full w-full" name="jd_form">
+                    <label for="message" class="block mb-2 text-center text-lg font-medium text-primary">
+                        Job Desription
+                    </label>
+                    <textarea id="message" [(ngModel)]="job_description" name="job_description" required
+                        class="block p-2.5 min-h-[93%] w-full text-sm text-secondary bg-transparent rounded-lg border border-secondary/40 focus:border-secondary"
+                        placeholder="Enter the job desription"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="flex gap-3 m-2 mx-auto justify-start">
+            <button type="button" (click)="handleUploadFile()" routerLinkActive="router-link-active"
+                class="text-sm mx-1 font-medium w-20 border border-blue-500 px-4 py-3 bg-blue-500 text-blue-50 rounded-lg hover:bg-blue-600 ease-in-out">
+                Submit
+            </button>
+            <button type="button" (click)="handleRemovesFile()"
+                class="text-sm mx-1 font-medium w-20 border border-red-500 px-4 py-3 rounded-lg text-red-500 hover:bg-red-500 hover:text-white ease-in-out">
+                Cancel
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="isUploading" class="md:flex items-center content-center min-h-[350px] gap-x-6">
+        <div
+            class="relative flex flex-col outline-secondary/50 mt-24 outline-2 -outline-offset-4 outline-dashed w-[400px] h-[400px] rounded-2xl items-center justify-center">
+            <h1>Reviewing resume...</h1>
+            <app-loading [spinningSquares]="true" />
+        </div>
+    </div>
+
+</div>

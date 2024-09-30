@@ -5,7 +5,11 @@
   "projects": {
     "frontend": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:service": {
+          "path": "src/services"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",

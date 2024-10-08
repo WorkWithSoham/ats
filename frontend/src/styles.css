@@ -4,6 +4,17 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+    width: 6px;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(75, 75, 80);
+}
+
 .app-root {
     font-family: "Gowun Batang", serif;
     font-weight: 800;

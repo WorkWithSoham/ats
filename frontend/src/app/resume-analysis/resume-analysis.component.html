@@ -1,0 +1,65 @@
+<div class="flex flex-col p-6 space-y-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 flex-grow">
+        <div class="flex flex-col space-y-4 max-h-full">
+            <div
+                class="rounded-md border w-full p-6 shadow-md shadow-secondary/30 bg-background_accent/20 border-background_accent">
+                <h1 class="text-2xl font-bold text-primary text-center m-2">Resume Match Percentage</h1>
+                <p class="text-center">{{ resumeAnalysis.description }}</p>
+                <div class="relative size-30">
+                    <div class="container mx-auto m-3">
+                        <div #circle class="circle" [attr.data-degree]="resumeAnalysis.percentage_match"
+                            data-color="#ff2972">
+                            <h2 class="number">{{ resumeAnalysis.percentage_match }}%</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="rounded-md flex flex-col border w-full p-2 shadow-md shadow-secondary/30 bg-background_accent/20 border-background_accent">
+                <h1 class="text-2xl font-bold text-primary text-center m-2">Skills</h1>
+                <div class="grid grid-cols-2">
+                    <div
+                        class="rounded-md border h-96 m-3 p-4 shadow-md shadow-secondary/30 bg-background_accent/20 border-background_accent overflow-y-scroll">
+                        <h1 class="text-xl">Skills matched</h1>
+                        <ul *ngFor="let skill of resumeAnalysis.skills?.skills_matched"
+                            class="list-inside text-sm md:text-base list-none md:list-disc text-start m-2">
+                            <li>{{ skill }} <app-svg [check]="true"
+                                    [class]="'size-6 text-green-600 h-4 w-4 inline-block'" /></li>
+                        </ul>
+                    </div>
+                    <div
+                        class="rounded-md h-96 border m-3 p-4 shadow-md shadow-secondary/30 bg-background_accent/20 border-background_accent overflow-y-scroll">
+                        <h1 class="text-xl">Skills not present</h1>
+                        @if (resumeAnalysis.skills?.skills_matched?.length) {
+                        <ul *ngFor="let skill of resumeAnalysis.skills?.skills_missing"
+                            class="list-inside text-sm md:text-base list-none md:list-disc text-start m-2">
+                            <li>{{ skill }} <app-svg [check]="false"
+                                    [class]="'size-6 text-yellow-600 h-4 w-4 inline-block'" />
+                            </li>
+                        </ul>
+                        } @else {
+                        <p>All skills present! Awesome Job!</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="rounded-md border w-full p-6 shadow-md shadow-secondary/30 bg-background_accent/20 border-background_accent flex justify-center items-center flex-grow">
+            <img [src]="fileUrl" alt="Resume">
+        </div>
+    </div>
+    <hr class="border-t-2 border-secondary/30 mt-4">
+</div>
+
+<div class="flex flex-col">
+    <div
+        class="rounded-md border w-1/2 m-3 mx-auto p-6 shadow-md shadow-secondary/30 bg-background_accent/20 border-background_accent justify-center items-center">
+        <h1 class="text-3xl text-center">Formatting</h1>
+        <br>
+        <p>{{ resumeAnalysis.formatting_description }}</p>
+    </div>
+    <hr class="border-t-2 border-secondary/30 mt-4">
+    <div class="grid grid-cols-3">
+    </div>
+</div>

@@ -49,17 +49,26 @@
             <img [src]="fileUrl" alt="Resume">
         </div>
     </div>
-    <hr class="border-t-2 border-secondary/30 mt-4">
+    <hr class="border-t-2 border-secondary/30">
 </div>
 
 <div class="flex flex-col">
-    <div
-        class="rounded-md border w-1/2 m-3 mx-auto p-6 shadow-md shadow-secondary/30 bg-background_accent/20 border-background_accent justify-center items-center">
-        <h1 class="text-3xl text-center">Formatting</h1>
-        <br>
-        <p>{{ resumeAnalysis.formatting_description }}</p>
+    <div class="grid grid-cols-2 p-6">
+        <div
+            class="rounded-md border m-3 p-6 shadow-md shadow-secondary/30 bg-background_accent/20 border-background_accent justify-center items-center">
+            <h1 class="text-3xl text-center">Formatting</h1>
+            <br>
+            <p>{{ resumeAnalysis.formatting_description }}</p>
+        </div>
+        <div
+            class="rounded-md border m-3 p-6 shadow-md shadow-secondary/30 bg-background_accent/20 border-background_accent justify-center items-center">
+            <h1 class="text-2xl font-bold text-primary text-center m-2">Tailoring Suggestions</h1>
+            <ul class="list-inside list-disc text-sm md:text-base text-start m-4">
+                <li *ngFor="let advice of resumeAnalysis.tailoring_suggestions?.role_specific_language_suggestions">
+                    {{ advice }}
+                </li>
+            </ul>
+        </div>
     </div>
-    <hr class="border-t-2 border-secondary/30 mt-4">
-    <div class="grid grid-cols-3">
-    </div>
+    <hr class="border-t-2 border-secondary/30">
 </div>

@@ -1,16 +1,6 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  HostListener,
-  OnInit,
-  ViewChild,
-  ViewChildren,
-} from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ResumeAnalysis } from '../interfaces/ResumeAnalysis';
-import { DataService } from '../../services/api/data.service';
-import { NavigationStart, Router } from '@angular/router';
-import { res } from '../temp-data/data';
+import { Router } from '@angular/router';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { SvgComponent } from '../svg/svg.component';
 
@@ -30,7 +20,6 @@ export class ResumeAnalysisComponent {
     let degree = 0;
     const targetDegree = parseInt(progress.getAttribute('data-degree')!);
     const color = this.getColor(this.resumeAnalysis.percentage_match!);
-    const number = progress.querySelector('.number');
 
     const interval = setInterval(() => {
       degree += 1;
@@ -42,19 +31,14 @@ export class ResumeAnalysisComponent {
     }, 15);
   }
 
-  // ngOnInit(): void {
-  //   this.router.events.subscribe(() => {
-  //     this.fileUrl = localStorage.getItem('fileUrl')!;
-  //   });
-  // }
+  ngOnInit(): void {
+    this.router.events.subscribe(() => {
+      this.fileUrl = localStorage.getItem('fileUrl')!;
+    });
+  }
 
-  // resumeAnalysis: ResumeAnalysis = JSON.parse(window.history.state[0]);
-  // fileUrl: string = localStorage.getItem('fileUrl')!;
-
-  value: number = 65;
-  resumeAnalysis: ResumeAnalysis = res;
-  fileUrl: string =
-    'https://www.resumebuilder.com/wp-content/uploads/2023/12/Homepage-2.png';
+  resumeAnalysis: ResumeAnalysis = JSON.parse(window.history.state[0]);
+  fileUrl: string = localStorage.getItem('fileUrl')!;
 
   getColor(percentage: number): string {
     if (percentage >= 80) {

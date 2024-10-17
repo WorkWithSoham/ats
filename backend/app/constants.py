@@ -6,11 +6,11 @@ RESUME_REVIEW_PROMPT = """
                         You are an experienced HR with tech experience in the field of Computer Science, Data Science, Data Analysis and related fields. 
                         Your task is to review the provided resume against the job description.
                         Please share your thorough professional evaluation on whether the candidate's profile accurately matches with the job description.
-                        Highlight the strengths and weaknesses of the applicant in relation to the specified job description.
+                        Highlight the strengths and weaknesses of the applicant in relation to the specified job description. Please provide the response as if you are speaking to the candidate.
                     """
 
 JSON_RESPONSE_EXPECTED = """
-                        Please provide a response as if you are telling the candidate, in the following JSON:
+                        Please provide a response in the following JSON format:
                         {
                             "description": "string - 100-150 words summarizing the match between job description and resume",
                             "formatting_description": "string - 80-100 words suggesting resume formatting improvements",
